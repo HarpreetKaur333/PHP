@@ -37,14 +37,50 @@ $selected = ABOUT;
     <nav id="navigation">
 
         <ul>
-            <li class="menu-item"><?php echo HOME; ?>
-            </li>
-            <li class="menu-item"><?php echo PRODUCT; ?>
-            </li>
+            <?php
+             if ($selected == HOME) {?>
             <li class="selected"><?php echo $selected; ?>
             </li>
+            <?php } else {?>
+            <li class="menu-item"><?php echo HOME; ?>
+            </li>
+            <?php }
+            ?>
+            <?php
+             if ($selected == PRODUCT) {?>
+            <li class="selected"><?php echo $selected; ?>
+            </li>
+            <?php } else {?>
+            <li class="menu-item"><?php echo PRODUCT; ?>
+            </li>
+            <?php }
+            ?>
+            <?php
+             if ($selected == ABOUT) {?>
+            <li class="selected"><?php echo $selected; ?>
+            </li>
+            <?php } else {?>
+            <li class="menu-item"><?php echo ABOUT; ?>
+            </li>
+            <?php }
+            ?>
+            <?php
+             if ($selected == IDEA) {?>
+            <li class="selected"><?php echo $selected; ?>
+            </li>
+            <?php } else {?>
             <li class="menu-item"><?php echo IDEA; ?>
             </li>
+            <?php }
+            ?>
+            <!-- <li class="menu-item"><?php //echo HOME;?>
+            </li>
+            <li class="menu-item"><?php //echo PRODUCT;?>
+            </li>
+            <li class="selected"><?php //echo $selected;?>
+            </li>
+            <li class="menu-item"><?php //echo IDEA;?>
+            </li> -->
         </ul>
     </nav>
 </body>

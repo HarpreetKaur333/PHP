@@ -62,7 +62,7 @@ $previsions = [
             <?php foreach ($previsions as $key => $weatherforcast) {
     echo $key.' '; ?>
             <img src="images/<?php echo $weatherforcast['image_file']; ?>"
-                alt="<?php $weatherforcast['image_desc']; ?>">
+                alt="<?php echo $weatherforcast['image_desc']; ?>">
 
             <?php echo $weatherforcast['temperature'].'<br>';
 }?>
