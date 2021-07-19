@@ -30,22 +30,30 @@ showTitle('Exercice 1 full date and time');
 echo date(DATE_RFC2822, $t).'<br>';
 
 showTitle('Exercice 2 Day only');
-// your code here
+echo date('d', $t).'<br>';
 
 showTitle('Exercice 3 The Month only');
-// your code here
+echo date('m', $t).'<br>';
+echo date('F', $t).'<br>';
 
 showTitle('Exercice 4 The Year only');
-// your code here
+echo date('Y', $t).'<br>';
 
 showTitle('Exercice 5 Date displayed like 10,january,2019');
-// your code here
+echo date('d,F,Y', $t);
 
 showTitle('Exercice 6 Add 1 month and full display');
-// your code here
+// echo date('Y-m-d', strtotime('+1 month', $t))."\n";
+echo date(DATE_RFC2822, strtotime('+1 month', $t));
 
 showTitle('Exercice 7 Number of days since 31 décembre 1973');
-// your code here
+// $date = date('Y/m/d H:i:s');
+// echo $date;
+// $now = time(); // or your date as well
+$given_date = strtotime('1973-12-31');
+// echo $given_date;
+$no_of_days = $t - $given_date;
+echo round($no_of_days / (60 * 60 * 24));
 
 showTitle('Exercice 8 Date displayed like Thurday, 10 january 2019');
-// your code here
+echo date('l, d F Y', $t);

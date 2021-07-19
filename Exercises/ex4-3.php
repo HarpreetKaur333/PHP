@@ -81,40 +81,50 @@ const MINIMUM_EXPERIENCE = 5;
             </tr>
 
         </thead>
-        <tr>
-            <?php $totalsum = 0;
+
+        <?php $totalsum = 0;
             foreach ($Candidats as $key => $val) {
-                ?>
-            <td><?php print_r($val[0]); ?>
-            </td>
-            <td><?php print_r($val[1]); ?>
-            </td>
-            <td><?php print_r($val[2]); ?>
-            </td>
-            <td><?php print_r($val[3]); ?>
-            </td>
-            <td><?php //print_r($val[4]);
+                if ($val[1] == AGE_REFERENCE) {
+                    $tr = '<tr class="age-reference">';
+                } elseif ($val[1] > AGE_REFERENCE) {
+                    $tr = '<tr class="age-over">';
+                } else {
+                    $tr = '<tr class="age-under">';
+                } ?>
+        <?php echo $tr; ?>
+        <td><?php print_r($val[0]); ?>
+        </td>
+        <td><?php print_r($val[1]); ?>
+        </td>
+        <td><?php print_r($val[2]); ?>
+        </td>
+        <td><?php print_r($val[3]); ?>
+        </td>
+        <td><?php //print_r($val[4]);
                 foreach ($val[4] as $key => $value) {
-                    print_r($key.' '.$value.' ans');
+                    $class = ($value < MINIMUM_EXPERIENCE) ? 'experience-invalid' : 'experience-valid';
+                    echo '<span class="'.$class.'">'.$key.' : '.$value.' ans'.'</span></br>';
+                    // print_r($key.' '.$value.' ans');
                     echo '<br>';
                 }
                 $totalsum += $val[1];
                 // echo $totalsum;?>
-            </td>
+        </td>
         </tr>
         <?php
             }?>
         <tr>
-            <?php $countelements = count($Candidats);
-            // $arraysum_age = array_sum($Candidats[1]);?>
+            <?php $countelements = count($Candidats); ?>
+            <td>Average</td>
+            <td><?php echo $totalsum / $countelements; ?>
+            </td>
+            <?php // $arraysum_age = array_sum($Candidats[1]);?>
             <!-- here array sum not match-->
             <!-- <td><?php //echo $countelements;?>
             </td> -->
             <!-- <td><?php //echo array_sum($Candidats[1]);?>
             </td> -->
-            <td>Average</td>
-            <td><?php echo $totalsum / $countelements; ?>
-            </td>
+
         </tr>
 
 
