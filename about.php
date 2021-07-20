@@ -1,10 +1,21 @@
 <?php
 require_once 'Contant.php';
+require_once 'Common_Tool_Function.php';
 $title = 'Bank Of Canada';
 $description = 'About the Bank';
 ?>
 <!DOCTYPE html>
 <html lang="en-CA">
+<?php class Web_About_Page
+{
+}
+
+function render($PageData)
+{
+    if (!isset($pageData['content'])) {
+        Crash(500, 'WEB PAGE Content is not set');
+    }
+}?>
 
 <head>
     <title><?php echo $title; ?>

@@ -19,3 +19,8 @@ function redirect($newURL)
 {
     header('location:', $newURL);
 }
+function Crash($code, $msg)
+{
+    header('HTTP/01'.$code.''.$msg);
+    exit($msg);
+}

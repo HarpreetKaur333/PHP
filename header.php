@@ -5,8 +5,10 @@
         <div class="top-bar-wrap ">
             <div class="container">
                 <div class="header-logo">
+                    <a href="index.php">
                     <img src="<?php echo BANKLOGO; ?>"
                         alt="Bank Logo" class="logimg">
+                        </a>
                 </div>
                 <div class="toolbar-search pull-right">
                     <div class="form-group">

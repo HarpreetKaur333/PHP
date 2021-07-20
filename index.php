@@ -192,3 +192,16 @@ require_once 'footer.php';
 </body>
 
 </html>
+<?php function AbpoutPage()
+{
+    $pageData['title'] = 'about page';
+    $pageData['description'] = 'About Canada Bank';
+    $pageData['count'] = <<<EOD
+    <p>Page Content</p>
+    EOD;
+    $webPage = new WebPage();
+    $webPage->render($pageData);
+}
+        // if (!isset($content)) {
+        //     Crash(500, 'web page content is not set in web page');
+        // }
