@@ -17,19 +17,24 @@ require_once 'Tool.php';
 <body>
 
     <?php
-    require_once 'header.php';
-    require_once 'product_table.php';
+    require_once 'product.php';
+    //require_once 'Products_Catalogue_table.php';
 
  if (isset($_GET['op'])) {
      $op = $_GET['op'];
-     $product_Obj = new Product();
+
      switch ($op) {
         case 110:
+            $product_Obj = new Product();
             $product_Obj->Products_List();
             break;
         case 111:
+            $product_Obj = new Product();
             $product_Obj->Products_Catalogue();
             break;
+        case 10:
+            $product_Obj->Products_About();
+                break;
         // case 99:
         //     header('Content-type: application/pdf');
         //     header('Content-Dispostion:attachment;filename=some_file.pdf');
@@ -41,6 +46,8 @@ require_once 'Tool.php';
             exit();
     }
  }
+
+require_once 'header.php';
 
 require_once 'footer.php';
 

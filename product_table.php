@@ -1,3 +1,109 @@
+<style>
+.logo_pic{
+    width: 100px;
+    height: 60px;
+}
+
+.company_name{
+    color: white;
+    font-size: revert;
+ }
+.product {
+  width: 190px;
+  height: 360px;
+  overflow: auto;
+  border: 1px solid black;
+  text-align: center;
+  display: inline-block;
+  margin: 10px;
+}
+
+.product:hover {
+  background-color: #c0c0c0;
+}
+
+
+.product img {
+  width: 100%;
+}
+
+.product .name {
+  font-size: 24px;
+  margin: 0;
+}
+
+.product .description {
+  margin: 0;
+}
+
+.product .price {
+  font-size: 24px;
+  color: red;
+  font-weight: bold;
+  margin: 0;
+}
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+  }
+  .header {
+    padding: 80px;
+    text-align: center;
+    background: #1abc9c;
+    color: white;
+  }
+  .header h3 {
+    font-size: 40px;
+  }
+  h3{
+    margin: 20px 20px 20px 20px;
+  }
+  table{
+    margin: 20px 20px 20px 20px;
+  }
+  .navbar {
+    overflow: hidden;
+    background-color: #333;
+    margin: 20px 20px 0px 20px;
+  }
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+  }
+  .navbar a.right {
+    float: right;
+  }
+
+  .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  .row {
+    display: -ms-flexbox; /* IE10 */
+    display: flex;
+    -ms-flex-wrap: wrap; /* IE10 */
+    flex-wrap: wrap;
+  }
+  .side {
+    -ms-flex: 30%; /* IE10 */
+    flex: 30%;
+    background-color: #f1f1f1;
+    padding: 20px;
+  }
+
+  .footer {
+    padding: 1px 0px 1px 10px;
+    text-align: left;
+    background: #000;
+    color: #fff;
+    margin: 20px 20px 20px 20px;
+  }
+
+</style>
 <?php
 
 $products = [

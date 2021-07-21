@@ -51,19 +51,19 @@ $products = [
 ],
 ];
 
-// function Products_Catalogue()
-// {
-//     global $products;
-//     foreach ($products as $product) {
-//         echo '<div class="product">';
-//         echo '<img src="products_images/'.$product['pic'].'"/>';
-//         echo '<div class="name">'.$product['name'].'</div>';
-//         echo '<div class="description ">'.$product['description'].'</div>';
-//         echo '<div class="price ">'.$product['price'].'</div>';
-//         echo '<div class="name">'.$product['qty_in_stock'].'</div>';
-//         echo '</div>';
-//     }
-// }
+function Products_About()
+{
+    global $products;
+    foreach ($products as $product) {
+        echo '<div class="product">';
+        echo '<img src="products_images/'.$product['pic'].'"/>';
+        echo '<div class="name">'.$product['name'].'</div>';
+        echo '<div class="description ">'.$product['description'].'</div>';
+        echo '<div class="price ">'.$product['price'].'</div>';
+        echo '<div class="name">'.$product['qty_in_stock'].'</div>';
+        echo '</div>';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>

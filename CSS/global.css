@@ -391,6 +391,9 @@ width: 100%;
 {
 	text-align: center;
 }
+.text-left{
+    text-align: left;
+}
 .graphimg{
 	    height: 150px;
     margin-left: 40px;
