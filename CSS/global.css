@@ -45,16 +45,16 @@ body {
     margin-bottom: 0;
     vertical-align: middle;
 }
-.form-control {
+/* .form-control {
     display: block;
     width: 93%;
     height: 15px;
     padding: 6px 12px;
     font-size: 14px;
     line-height: 1.5;
-    color: #555;
+    color: #555; */
     /* vertical-align: middle; */
-    background-color: #fff;
+    /* background-color: #fff;
     background-image: none;
     border: 1px solid #ccc;
     border-radius: 1px;
@@ -63,7 +63,7 @@ body {
     display: inline-table;
     width: 240px;
     position: relative;
-}
+} */
 .imglab{
 	width:50px
 }

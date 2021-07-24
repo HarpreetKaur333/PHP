@@ -9,6 +9,7 @@ require_once 'HomePage.php';
 require_once 'CoreFunctionofBank.php';
 require_once 'about.php';
 require_once 'Users.php';
+require_once 'register.php';
 require_once 'product_table.php';
 ?>
 
@@ -32,6 +33,14 @@ if (isset($_GET['op'])) {
         case 3:
                 $users = new Users();
                 $users->Logout(); //verify the login details
+                break;
+        case 4:
+                $register = new register();
+                $register->register(); //display register page
+                break;
+        case 5:
+                $register = new register();
+                $register->register_verify(); //verify the register details
                 break;
         case 10:
             $about_page_obj = new AboutPage();

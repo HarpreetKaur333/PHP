@@ -11,7 +11,7 @@ class AboutPage
         importance of trade and exports to Canada’s economic recovery. He also talks about steps
         policy-makers and business can take to attract investment and improve
         competitiveness.</p>
-        EOD;
+EOD;
         $webPage = new WebPage();
         $webPage->render($pageData);
     }

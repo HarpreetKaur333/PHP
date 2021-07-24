@@ -12,7 +12,7 @@ class db_pdo
     //automatically connect when creating a db_pdo project
     public function __construct()
     {
-        $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+        $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
         try {
             $this->connection = new PDO('mysql:host='.self::DB_HOST.';port='.self::DB_PORT.';dbname='.self::DB_NAME, self::DB_USER_NAME, self::DB_USER_PW, $options);
         } catch (PDOException $e) {

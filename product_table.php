@@ -1,5 +1,5 @@
 <style>
-.logo_pic{
+    .logo_pic{
     width: 100px;
     height: 60px;
 }
@@ -103,6 +103,7 @@
     margin: 20px 20px 20px 20px;
   }
 
+
 </style>
 <?php
 
@@ -182,7 +183,7 @@ class Product
         global $products;
         foreach ($products as $product) {
             echo '<div class="product">';
-            echo '<img src="products_images/'.$product['pic'].'"/>';
+            echo '<img src="images/'.$product['pic'].'"/>';
             echo '<div class="name">'.$product['name'].'</div>';
             echo '<div class="description ">'.$product['description'].'</div>';
             echo '<div class="price ">'.'$'.$product['price'].'</div>';
