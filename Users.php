@@ -1,5 +1,9 @@
 <?php
 
+// if (!isset($index_loaded)) {
+//     header('HTTP / 01 400 this page can not be accessed directly');
+//     exit('this page cannot accessed directly');
+// }
  require_once 'db_pdo.php';
 class Users
 {
@@ -30,7 +34,7 @@ class Users
         $pageData['content'] .= <<<HTML
         <div class="containter">
             <div class="row">
-                <div class="col-"
+                <div class="col-xs-12"
             <h3 class="text-left">Login Page Of Users</h3>
             <h5 style="color:red;margin-left:30px;">$msg</h5>
             <!-- <form action="index.php" method="GET"> -->

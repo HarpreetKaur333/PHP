@@ -7,6 +7,7 @@ class WebPage
 
     public function render($pageData)
     {
+        global $index_loaded;
         if (!isset($pageData['title'])) {
             $pageData['title'] = self::DEFAULT_TITLE;
         }
@@ -19,6 +20,10 @@ class WebPage
         require_once 'view/header.php';
         require_once 'nav.php'; ?>
 <main>
+    <?php
+    if (isset($pageData['message'])) {
+        echo '<div class="alert " role="alert">'.$pageData['message'].'</div>';
+    } ?>
     <?php echo $pageData['content']; ?>
 </main>
 <?php

@@ -1,5 +1,11 @@
-    <footer>
-        <div class="isi-footer-top-holder">
+     <?php
+    // if (!isset($index_loaded)) {
+    //     header('HTTP / 01 400 this page can not be accessed directly');
+    //     exit('this page cannot accessed directly');
+    // }
+    ?>
+     <footer>
+         <!-- <div class="isi-footer-top-holder">
             <div class="isi-footer-top-inner ">
                 <div class="isi-footer-row">
 
@@ -37,9 +43,9 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </div> -->
+     </footer>
 
-    </body>
+     </body>
 
-    </html>
+     </html>

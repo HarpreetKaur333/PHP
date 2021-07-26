@@ -1,3 +1,9 @@
+<?php
+    // if (!isset($index_loaded)) {
+    //     header('HTTP / 01 400 this page can not be accessed directly');
+    //     exit('this page cannot accessed directly');
+    // }
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 

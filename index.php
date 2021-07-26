@@ -2,6 +2,7 @@
 // phpinfo();
 // exit();
 session_start();
+$index_loaded = true; // the user entered here frist
 require_once 'Contant.php';
 require_once 'Common_Tool_Function.php';
 require_once 'view/WebPage.php';

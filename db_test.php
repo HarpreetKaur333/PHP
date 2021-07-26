@@ -12,6 +12,7 @@ echo 'no of users'.count($users);
 
 $offices = $DB->querySelect("SELECT * FROM offices where country='USA'");
 //  var_dump($offices);
+ echo table_Display($offices);
 
 //insert new country into table
 //    $insert_to_country_tb = $DB->querySelect("INSERT INTO countries(code,nom) Values('IN','INDIA')");
@@ -19,3 +20,8 @@ $offices = $DB->querySelect("SELECT * FROM offices where country='USA'");
 // $result_del = $DB->querySelect("DELETE FROM countries WHERE CODE='IN'");
 // echo 'number of deleted records: '.$result_del->rowCount();
 // var_dump($insert_to_country_tb);
+<<<HTML
+<fom>
+
+</form>
+HTML;

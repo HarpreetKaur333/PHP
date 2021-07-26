@@ -45,6 +45,10 @@ body {
     margin-bottom: 0;
     vertical-align: middle;
 }
+hr.new5 {
+    border: 10px solid lightpink;
+    border-radius: 5px;
+  }
 /* .form-control {
     display: block;
     width: 93%;
