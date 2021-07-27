@@ -162,7 +162,12 @@ class Product
 {
     public function Products_List()
     {
-        global $products;
+//         global $products;
+//         $pageData['title'] = 'Register As New User';
+//         $pageData['description'] = 'Create a account to shop track your order and etc..!!';
+
+//         $pageData['content'] = <<<HTML
+        // HTML;
         echo '<table border="1">';
         echo '<thead><tr><th>id</th><th>name</th><th>description</th><th>price</th><th>pic</th><th>stock</th></thead><tbody>';
         foreach ($products as $p_list) {

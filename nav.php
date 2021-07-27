@@ -24,6 +24,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?op=1">Login</a>
                 </li>
+
                 <?php } else {?>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?op=110">Product List</a>
@@ -34,12 +35,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?op=3">Logout</a>
                 </li>
-                Login User Email:<?php echo $_SESSION['email'];
-                }
+                <span class="m-3"> Login User Email:<?php echo $_SESSION['email']; ?>
+
+                    <i class="fa fa-user p-2"></i></span>
+
+                <?php }
                 ?>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?op=4">User Registration Form</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?op=300">Employee</a>
+                </li>
+
 
             </ul>
             <!-- <form class="d-flex">

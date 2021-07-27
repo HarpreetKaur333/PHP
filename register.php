@@ -28,16 +28,16 @@ class register
 
         $selected_province = '<select name="province" id="txtprovinceid" class="form-control form-control-lg">';
         foreach ($provinces_list  as $one_province) {
-            $selected_province .= '<option value="'.$one_province['code'].'">'.$one_province['nom'].'</option>';
+            $selected_province .= '<option value="'.$one_province['nom'].'">'.$one_province['code'].'</option>';
         }
         $selected_province .= '</select>';
 
-        // $countries_list = $DB->table('countries');
-        // $countries_drop_down = '<select name="country" id="txtCountryid" class="form-control form-control-lg">';
-        // foreach ($countries_list  as $one_countries) {
-        //     $countries_drop_down .= '<option value="'.$one_countries['code'].'">'.$one_countries['nom'].'</option>';
-        // }
-        // $countries_drop_down .= '</select>';
+        $countries_list = $DB->table('countries');
+        $countries_drop_down = '<select name="country" id="txtCountryid" class="form-control form-control-lg">';
+        foreach ($countries_list  as $one_countries) {
+            $countries_drop_down .= '<option value="'.$one_countries['nom'].'">'.$one_countries['code'].'</option>';
+        }
+        $countries_drop_down .= '</select>';
 
         //when form is displayed for first time set default values for everything
         if ($previous_data == []) {
@@ -63,7 +63,7 @@ class register
                     <div class="col-12 col-lg-9 col-xl-7">
                         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                             <div class="card-body p-4 p-md-5">
-                             <h5 style="color:red;margin-left:30px;"></h5> <!--$msg -->
+                             <h5 style="color:red;margin-left:30px;"></h5>
                                 <h2 class=" pb-2 pb-md-0">Register as a New User</h2>
                                 <hr class="new5">
                                 <form action="index.php?op=5" method="POST" value="registration_form" class="form-inline" enctype="multipart/form-data" name="reg_form">
@@ -104,8 +104,8 @@ class register
                                         <div class="col-md-12 mb-4">
                                             <div class="form-outline">
                                             <label class="form-label" for="City">Country(Optional)</label>
-
-                                                <input type="text" id="txtCountryid" class="form-control form-control-lg"  value="" name="country" maxlength="50"  />
+                                            {$countries_drop_down}
+                                                <!-- <input type="text" id="txtCountryid" class="form-control form-control-lg"  value="" name="country" maxlength="50"  />-->
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-4">
@@ -209,43 +209,38 @@ HTML;
         // if (isset($_POST['reg_form']) !== 'registration_form') {
         //     Crash(400, 'bad request for form');
         // }
-        CIN('email', 350);
-        CIN('fullname', 50);
-        CIN('pw', 7);
-        CIN('address', 255);
-        CIN('city', 50);
-        CIN('postalcode', 7);
-        CIN('other_lang', 25);
-        $DB = new db_pdo();
-        if (isset($_POST['province'])) {
-            $provinces_list = $DB->querySelect("SELECT * FROM provinces WHERE code='".$_POST['province']."'");
-            if (count($provinces_list) === 0) {
-                Crash(400, 'Invalid Province code in registration form');
-            }
-        }
 
+        $DB = new db_pdo();
+        // if (isset($_POST['province'])) {
+        //     $provinces_list = $DB->querySelect("SELECT * FROM provinces WHERE code='".$_POST['province']."'");
+        //     if (count($provinces_list) === 0) {
+        //         Crash(400, 'Invalid Province code in registration form');
+        //     }
+        // }
+
+        $fullname = check_htmlentities(trim(isset($_POST['fullname']) ? $_POST['fullname'] : ''));
         $email = $pw = $pw2 = $fullname = $address = $city = $postal_code = $customerNumber = $level = '';
         $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
         $pw = trim(isset($_POST['pw']) ? $_POST['pw'] : '');
         $pw2 = trim(isset($_POST['pw2']) ? $_POST['pw2'] : '');
-        $fullname = htmlentities(trim(isset($_POST['fullname']) ? $_POST['fullname'] : ''));
+        //$fullname = (trim(isset($_POST['fullname']) ? $_POST['fullname'] : ''));
         $address = trim(isset($_POST['address']) ? $_POST['address'] : '');
         $city = trim(isset($_POST['city']) ? $_POST['city'] : '');
-        $selected_country = trim(isset($_POST['country']) ? $_POST['country'] : '');
+        // $selected_country = trim(isset($_POST['country']) ? $_POST['country'] : '');
         $postalcode = trim(isset($_POST['postalcode']) ? $_POST['postalcode'] : '');
         // $picture = isset($_POST['my_image']) ? $_POST['my_image'] : null;
-        $customerNumber = trim(isset($_POST['customerNumber']) ? $_POST['customerNumber'] : 123);
+        // $customerNumber = trim(isset($_POST['customerNumber']) ? $_POST['customerNumber'] : 123);
 
         if (trim(isset($_Post['province']) and !empty($_POST['province']))) {
-            $selected_province = $_POST['province'];
+            $province = $_POST['province'];
         } else {
-            $selected_province = '';
+            $province = '';
         }
-        // if (trim(isset($_Post['country']) and !empty($_POST['country']))) {
-        //     $selected_country = $_POST['country'];
-        // } else {
-        //     $selected_country = 'CA';
-        // }
+        if (trim(isset($_Post['country']) and !empty($_POST['country']))) {
+            $country = $_POST['country'];
+        } else {
+            $country = '';
+        }
         $insert_lang = '';
         if (trim(isset($_POST['language']))) {
             $radioVal = $_POST['language'];
@@ -304,7 +299,13 @@ HTML;
         if (isset($errormsg)) {
             self::Register($errormsg, $previous_data);
         }
-
+        CIN('email', 350);
+        CIN('fullname', 50);
+        CIN('pw', 7);
+        CIN('address', 255);
+        CIN('city', 50);
+        CIN('postalcode', 7);
+        CIN('other_lang', 25);
         // check if email already exist
 
         // var_dump($previous_data);
@@ -337,9 +338,9 @@ HTML;
             $this->register($previous_data, $errormsg); //anamefter error msg refil form
         } else {
             if (isset($_FILES['my_image']['name'])) {
-                $pic_name = basename($_FILES['my_image']['']);
+                $pic_name = basename($_FILES['my_image']['name']);
 
-                // echo $pic_name;
+                echo $pic_name;
                 $errormsg = Picture_Uploaded_Save_File('my_image', 'users_images/');
                 if ($errormsg !== 'ok' and $errormsg !== 'error picture uploaded: code=4') {
                     $previous_data['pw'] = '';
@@ -351,15 +352,33 @@ HTML;
             }
             $previous_data['fullname'] = htmlentities($previous_data['fullname']);
             // for avoid the html code inside adatbase
-            $fullname = htmlentities($_POST['fullname']);
-            echo 'inside query';
-            $sql_query = $DB->queryInsert("INSERT INTO users (email, pw, level , fullname, address , city, province, country, postal_code, language , other_lang, spam_ok, picture, customerNumber) VALUES ('$email ',' $pw ',' $level ',' $fullname ',' $address ',' $city ','Q','C',' $postalcode ',' $insert_lang ',' $other_lang ', $spam_ok,  $pic_name ,$customerNumber)");
-            var_dump($sql_query);
-            print_r($sql_query);
+            // $fullname = htmlentities($_POST['fullname']);
+
+            // var_dump($_POST);
+            // $sql_query = "INSERT INTO users (email, pw, level , fullname, address , city, province, country, postal_code, language , other_lang, spam_ok, picture, customerNumber) VALUES ('$email','$pw','$level'
+            // ,'$fullname','$address','$city','$selected_province','$selected_country','$postalcode','$insert_lang',
+            // '$other_lang', $spam_ok, $pic_name ,123)";
+            var_dump($_POST['email']);
+            var_dump($fullname);
+            var_dump($address);
+            var_dump($city);
+            var_dump($postalcode);
+            var_dump($insert_lang);
+            var_dump($other_lang);
+            var_dump($pic_name);
+            // print_r($sql_query);
+
+            $sql_query = "INSERT INTO users (email, pw,level, fullname, address, city, province, country,
+           postal_code, language, other_lang, spam_ok, picture, customerNumber) VALUES
+           ('$email','$pw','admin', '$fullname','$address','$city',
+            'Q','CA','$postalcode','$insert_lang','$other_lang',1,'$pic_name',123)";
+
+            Picture_Uploaded_Save_File('name', 'users_images/');
+            $this->Logout();
+            // print_r($sql_query);
+            // $DB->query($query);
 
             //here uploaded picture
-            Picture_Uploaded_Save_File('picture', 'users_images/');
-            $this->Logout;
 
             // $pageData['title'] = 'connected';
             // $pageData['content'] = '<h6>New User record created successfully.</h6> Welcome back '.$email.'.!!';

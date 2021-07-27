@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
     <script src="Bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="Bootstrap/Jquery/jquery-3.6.0.min.js"> </script>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="Bootstrap/fontawesome-free-5.15.3-web/css/fontawesome.min.css">
+    <link rel="stylesheet" href="Bootstrap/fontawesome-free-5.15.3-web/css/fontawesome.css">
     <?php ?>
 </head>
 

@@ -8,5 +8,4 @@ if (!isset($index_loaded)) {
 define('BANKNAME', 'Bank Of Canada');
 define('AUTHOR', 'Harpreet kaur');
 define('BANKLOGO', 'images/logo.png');
-define('COPYRIGHT', 'Copyright Bank Of Canada
-© 2020');
+define('COPYRIGHT', 'Copyright Bank Of Canada <br>© 2020');

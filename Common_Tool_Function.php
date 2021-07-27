@@ -19,25 +19,51 @@ function Array_Display($array)
     }
     echo '</table>';
 }
-function table_Display($table)
+
+// function Table_Display($table)
+// {​​​​​​​
+//     $html_table = '<table class="table table-striped table-hover">';
+//     if (!isset($table) === 0) {​​​​​​​
+//         return 'Table is empty';
+//     }​​​​​​​
+//     $html_table = '<tr>';
+//     $collNames = array_keys($table[0]);
+//     foreach ($collNames as $one_coll) {​​​​​​​
+//         $html_table .= '<th>'.$one_call.'</th>';
+//     }​​​​​​​
+//     $html_table .= '</tr>';
+//     foreach ($table as $one_record) {​​​​​​​
+//         $html_table .= '<tr>';
+//         foreach ($one_record as $one_c) {​​​​​​​
+//             $html_table .= '<td>'.$one_c.'</td>';
+//         }​​​​​​​
+//         $html_table .= '</tr>';
+//     }​​​​​​​
+//     $html_table .= '</table>';
+//     return $html_table;
+// }​​​​​​​
+
+function Table_display($table)
 {
     $html_table = '<table class="table table-striped table-hover">';
     if (count($table) === 0) {
-        echo 'table is empty';
+        return 'table is empty';
     }
-    $html_table .= '<thead><tr>';
+    $html_table .= '<tr>';
     $col_name = array_keys($table[0]);
     foreach ($col_name as $each_col_name) {
         $html_table .= '<th>'.$each_col_name.'</th>';
     }
-    $html_table .= '</tr></thead>';
-    $html_table .= '<tbody>';
+    // $html_table .= '</tr>';
+    // $html_table .= '<tbody>';
     foreach ($table as $each_table_row) {
         $html_table .= '<tr>';
-        $html_table .= '<td>'.$each_table_row.'</td>';
+        foreach ($each_table_row as $one_column) {
+            $html_table .= '<td>'.$one_column.'</td>';
+        }
         $html_table .= '</tr>';
     }
-    $html_table .= '</tbody>';
+    // $html_table .= '</tbody>';
     $html_table .= '</table>';
 
     return $html_table;
@@ -58,6 +84,10 @@ function CIN($name, $maxLength)
             Crash(400, 'Form input too long..!! :'.$name);
         }
     }
+}
+function check_htmlentities($str)
+{
+    return htmlentities($str);
 }
 /**
  * Check uploaded file contains a valid image

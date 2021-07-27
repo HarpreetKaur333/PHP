@@ -84,6 +84,29 @@ class db_pdo
     {
     }
 
+    public function queryParam($sql_str, $params)
+    {
+        try {
+            $stmt = $this->connection->prepare($sql_str);
+            $stmt->execute($params);
+        } catch (PDOException $e) {
+            Crash(500, 'Sql statement '.$e.getMessage());
+        }
+    }
+
+    public function querySelectParam($sql_str, $params)
+    {
+        try {
+            $stmt = $this->connection->prepare($sql_str);
+            $stmt->execute($params);
+            $records = $stmt->fetchall();
+        } catch (PDOException $e) {
+            Crash(500, 'Sql statement '.$e.getMessage());
+        }
+
+        return $records;
+    }
+
     public function disconnect()
     {
         $this->connection = null;

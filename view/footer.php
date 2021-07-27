@@ -5,6 +5,9 @@
     // }
     ?>
      <footer>
+         <!-- <p>Author: Hege Refsnes</p>
+         <p><a href="mailto:hege@example.com">hege@example.com</a></p> -->
+
          <!-- <div class="isi-footer-top-holder">
             <div class="isi-footer-top-inner ">
                 <div class="isi-footer-row">

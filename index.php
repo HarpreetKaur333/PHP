@@ -11,13 +11,16 @@ require_once 'CoreFunctionofBank.php';
 require_once 'about.php';
 require_once 'Users.php';
 require_once 'register.php';
+require_once 'employes.php';
 require_once 'product_table.php';
 ?>
 
 <?php
 if (isset($_GET['op'])) {
     $op = $_GET['op'];
-
+} else {
+    $op = 0;
+}
     switch ($op) {
         case 0:
             $home_Page_obj = new HomePage();
@@ -60,6 +63,12 @@ if (isset($_GET['op'])) {
                 $product_Obj = new Product();
                 $product_Obj->Products_Catalogue();
                 break;
+        //200-299 for orders
+        //300-399 for employes
+        case 300:
+            $employes = new employes();
+            $employes->List();
+            break;
         case 99:
             header('Content-type: application/pdf');
             header('Content-Dispostion:attachment;filename=some_file.pdf');
@@ -67,7 +76,6 @@ if (isset($_GET['op'])) {
             exit();
             break;
         default:
-            header('HTTP/1.0  400 Operation not supported- bad Op code-file index not found..!!');
+            header('HTTP/1.0 400 Operation not supported- bad Op code-file index not found..!!');
             exit();
-}
 }
