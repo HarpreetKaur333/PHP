@@ -26,6 +26,7 @@ class employes
         } else {
             // $employes = $DB->table('employees');
             $employes = $DB->querySelect('SELECT * FROM employees');
+            // $employes = $DB->table('employees');
         }
 
         // $employes = $DB->table('employees');

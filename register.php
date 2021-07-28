@@ -358,20 +358,20 @@ HTML;
             // $sql_query = "INSERT INTO users (email, pw, level , fullname, address , city, province, country, postal_code, language , other_lang, spam_ok, picture, customerNumber) VALUES ('$email','$pw','$level'
             // ,'$fullname','$address','$city','$selected_province','$selected_country','$postalcode','$insert_lang',
             // '$other_lang', $spam_ok, $pic_name ,123)";
-            var_dump($_POST['email']);
-            var_dump($fullname);
-            var_dump($address);
-            var_dump($city);
-            var_dump($postalcode);
-            var_dump($insert_lang);
-            var_dump($other_lang);
-            var_dump($pic_name);
+            // var_dump($_POST['email']);
+            // var_dump($fullname);
+            // var_dump($address);
+            // var_dump($city);
+            // var_dump($postalcode);
+            // var_dump($insert_lang);
+            // var_dump($other_lang);
+            // var_dump($pic_name);
             // print_r($sql_query);
 
             $sql_query = "INSERT INTO users (email, pw,level, fullname, address, city, province, country,
            postal_code, language, other_lang, spam_ok, picture, customerNumber) VALUES
            ('$email','$pw','admin', '$fullname','$address','$city',
-            'Q','CA','$postalcode','$insert_lang','$other_lang',1,'$pic_name',123)";
+            'Q','CA','$postalcode','$insert_lang','$other_lang',$spam_ok,null,123)";
 
             Picture_Uploaded_Save_File('name', 'users_images/');
             $this->Logout();

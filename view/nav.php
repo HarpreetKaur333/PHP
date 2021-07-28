@@ -35,9 +35,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?op=3">Logout</a>
                 </li>
-                <span class="m-3"> Login User Email:<?php echo $_SESSION['email']; ?>
+                <span class="m-3"> Login User Email:<?php echo $_SESSION['email'];
+                ?>
 
-                    <i class="fa fa-user p-2"></i></span>
+                    <i class="fa fa-user p-2"></i>
+                </span>
 
                 <?php }
                 ?>

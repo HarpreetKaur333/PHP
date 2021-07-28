@@ -42,7 +42,26 @@ function Array_Display($array)
 //     $html_table .= '</table>';
 //     return $html_table;
 // }​​​​​​​
+function visitorCount()
+{
+    if (file_exists('visitors_counter.txt')) {
+        $count = file_get_contents('visitors_counter.txt');
+        $count = intval($count);
+    } else {
+        //first time called
+        $count = 0;
+        $dir = getcwd();
+        //create file
+        $filename = $dir.DIRECTORY_SEPARATOR.'visitors_counter.txt';
+        $file = fopen($filename, 'w');
+        fwrite($file, $count);
+        fclose($file);
+    }
+    ++$count;
+    file_put_contents('visitors_counter.txt', $count);
 
+    return $count;
+}
 function Table_display($table)
 {
     $html_table = '<table class="table table-striped table-hover">';

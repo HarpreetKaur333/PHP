@@ -3,16 +3,15 @@
 // exit();
 session_start();
 $index_loaded = true; // the user entered here frist
-require_once 'Contant.php';
+require_once 'Constants.php';
 require_once 'Common_Tool_Function.php';
 require_once 'view/WebPage.php';
 require_once 'HomePage.php';
 require_once 'CoreFunctionofBank.php';
 require_once 'about.php';
 require_once 'Users.php';
-require_once 'register.php';
 require_once 'employes.php';
-require_once 'product_table.php';
+require_once 'product.php';
 ?>
 
 <?php
@@ -39,11 +38,11 @@ if (isset($_GET['op'])) {
                 $users->Logout(); //verify the login details
                 break;
         case 4:
-                $register = new register();
-                $register->register(); //display register page
+                $users = new Users();
+                $users->register(); //display register page
                 break;
         case 5:
-                $register = new register();
+                $register = new Users();
                 $register->register_verify(); //verify the register details
                 break;
         case 10:
@@ -63,6 +62,10 @@ if (isset($_GET['op'])) {
                 $product_Obj = new Product();
                 $product_Obj->Products_Catalogue();
                 break;
+        case 190: //products web service-returns list of products json
+            $product_Obj = new Product();
+            $product_Obj->ListJSON();
+            break;
         //200-299 for orders
         //300-399 for employes
         case 300:
