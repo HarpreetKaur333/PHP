@@ -16,7 +16,7 @@
     </meta>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     </meta>
-    <meta name="icon" href="icon.jpg" type="images">
+    <meta name="icon" href="<?php echo BANKLOGO; ?>" type="images">
     </meta>
     <link rel="stylesheet" href="CSS/global.css">
     <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">

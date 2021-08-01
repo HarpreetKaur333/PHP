@@ -7,11 +7,10 @@ require_once 'Constants.php';
 require_once 'Common_Tool_Function.php';
 require_once 'view/WebPage.php';
 require_once 'HomePage.php';
-require_once 'CoreFunctionofBank.php';
 require_once 'about.php';
 require_once 'Users.php';
 require_once 'employes.php';
-require_once 'product.php';
+require_once 'Product.php';
 ?>
 
 <?php
@@ -66,6 +65,10 @@ if (isset($_GET['op'])) {
             $product_Obj = new Product();
             $product_Obj->ListJSON();
             break;
+        case 100: //show the list of all products
+            $product_Obj = new Product();
+            $product_Obj->List();
+            break;
         //200-299 for orders
         //300-399 for employes
         case 300:
@@ -79,6 +82,5 @@ if (isset($_GET['op'])) {
             exit();
             break;
         default:
-            header('HTTP/1.0 400 Operation not supported- bad Op code-file index not found..!!');
-            exit();
+            Crash(400, 'Operation not supported- bad Op code-file index not found..!!');
 }

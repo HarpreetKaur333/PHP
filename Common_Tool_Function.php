@@ -64,36 +64,89 @@ function visitorCount()
 }
 function Table_display($table)
 {
-    $html_table = '<table class="table table-striped table-hover">';
+    $html_table = '<div class="table-responsive-lg p-5 col-lg-12 "><table class="table table-striped table-md table-bordered table-hover table-responsive">';
     if (count($table) === 0) {
         return 'table is empty';
     }
-    $html_table .= '<tr>';
+    $html_table .= '<thead class="thead-light">';
     $col_name = array_keys($table[0]);
     foreach ($col_name as $each_col_name) {
         $html_table .= '<th>'.$each_col_name.'</th>';
     }
-    // $html_table .= '</tr>';
-    // $html_table .= '<tbody>';
+    $html_table .= '<th>Action</th>';
+    $html_table .= '</thead>';
+    $html_table .= '<tbody>';
     foreach ($table as $each_table_row) {
         $html_table .= '<tr>';
         foreach ($each_table_row as $one_column) {
             $html_table .= '<td>'.$one_column.'</td>';
         }
+        $html_table .= '<td><input type="button" name="view" value="view" class="btn btn-primary"/><input type="button" name="edit" value="edit" class="btn btn-primary"/><input type="button" name="delete" value="delete" class="btn btn-primary"/></td>';
         $html_table .= '</tr>';
     }
-    // $html_table .= '</tbody>';
-    $html_table .= '</table>';
+    $html_table .= '</tbody>';
+    $html_table .= '</table></div>';
 
     return $html_table;
 }
+
 function redirect($newURL)
 {
     header('location:', $newURL);
 }
+
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
+
+function my_gmail_function($to, $subject, $msg)
+{
+    /* Exception class. */
+    require 'src/Exception.php';
+
+    /* The main PHPMailer class. */
+    require 'src/PHPMailer.php';
+
+    /* SMTP class, needed if you want to use SMTP. */
+    require 'src/SMTP.php';
+
+    $mail = new PHPMailer();
+    $mail->IsSMTP();
+    $mail->CharSet = 'UTF-8';
+
+    $mail->Host = 'ssl://smtp.gmail.com'; // SMTP server example
+    $mail->SMTPDebug = 0;         // enables SMTP debug information (for testing)
+    $mail->SMTPAuth = true;       // enable SMTP authentication
+    $mail->Port = 465;            // set the SMTP port for the GMAIL server
+    $mail->Username = $to; // SMTP account username example
+    $mail->Password = '';
+    $mail->setFrom($to, 'JF L');
+
+    /* Add a recipient. */
+    $mail->addAddress('nishantbatra360@gmail.com', 'Error_Code');
+
+    /* Set the subject. */
+    $mail->Subject = $subject;
+
+    /* Set the mail message body. */
+    $mail->Body = 'Demo mail is working';
+    try {
+        $mail->send();
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
 function Crash($code, $msg)
 {
-    header('HTTP/01'.$code.''.$msg);
+    //get current date and time
+    $str_msg = 'Date: '.date('Y/m/d').' ip Address of System: '.$_SERVER['REMOTE_ADDR'].' HTTP Code: '.$code.' Error Message: '.$msg;
+    $date = date('Y/m/d');
+    //log error into file
+    $file = fopen('log/error_log.log', 'a+');
+    fwrite($file, $str_msg);
+    fclose($file);
+    my_gmail_function('dhillonharpreet333@gmail.com', 'Error On Sever', $str_msg);
+
+    header('HTTP/1.0 '.$code.''.$msg);
     exit($msg);
 }
 function CIN($name, $maxLength)
@@ -108,6 +161,7 @@ function check_htmlentities($str)
 {
     return htmlentities($str);
 }
+
 /**
  * Check uploaded file contains a valid image
  * extension must be: .jpg , .JPG , .gif ou .png.

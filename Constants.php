@@ -5,7 +5,7 @@ if (!isset($index_loaded)) {
     exit('this page cannot accessed directly');
 }
 
-define('BANKNAME', 'Bank Of Canada');
+define('ClASSMODELNAME', 'ClassicModels');
 define('AUTHOR', 'Harpreet kaur');
 define('BANKLOGO', 'images/logo.png');
 define('COPYRIGHT', 'Copyright Bank Of Canada <br>© 2020');

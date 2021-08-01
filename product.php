@@ -56,21 +56,25 @@ class Product
 {
     public function ListJSON()
     {
-//        $arr = ['a' => 1, 'b' => 2, 'c' => 3, 'd' => 4, 'e' => 5];
-//        echo json_encode($arr);
-
-        //phpinfo();
-
         $DB = new db_pdo();
         // $products = $DB->querySelect('SELECT * FROM products ORDER BY productLine ASC');
         $products = $DB->table('products', JSON_PRETTY_PRINT);
-        //var_dump($products);
         $productsJson = json_encode($products);
         header('Content-Type: application/json');
         // header('Content-Type: application/json; charset=UTF-8');
         http_response_code(200);
         echo $productsJson;
-        //echo json_encode($products);
+    }
+
+    public function List()
+    {
+        $DB = new db_pdo();
+        $products_table = $DB->table('products');
+        $pageData['title'] = 'List of all Products';
+        $pageData['description'] = 'details list of all products';
+        $PageData['content'] = table_Display($products_table);
+        $webPage = new WebPage();
+        $webPage->render($PageData);
     }
 
     public function Products_List()

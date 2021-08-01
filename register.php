@@ -222,6 +222,8 @@ HTML;
         $email = $pw = $pw2 = $fullname = $address = $city = $postal_code = $customerNumber = $level = '';
         $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
         $pw = trim(isset($_POST['pw']) ? $_POST['pw'] : '');
+
+        var_dump($_POST['pw']);
         $pw2 = trim(isset($_POST['pw2']) ? $_POST['pw2'] : '');
         //$fullname = (trim(isset($_POST['fullname']) ? $_POST['fullname'] : ''));
         $address = trim(isset($_POST['address']) ? $_POST['address'] : '');
@@ -367,10 +369,13 @@ HTML;
             // var_dump($other_lang);
             // var_dump($pic_name);
             // print_r($sql_query);
-
+            echo 'hello';
+            var_dump($_POST['pw']);
+            $password_hash = password_hash($_POST['pw'], PASSWORD_DEFAULT);
+            var_dump($password_hash);
             $sql_query = "INSERT INTO users (email, pw,level, fullname, address, city, province, country,
            postal_code, language, other_lang, spam_ok, picture, customerNumber) VALUES
-           ('$email','$pw','admin', '$fullname','$address','$city',
+           ('$email','$password_hash','admin', '$fullname','$address','$city',
             'Q','CA','$postalcode','$insert_lang','$other_lang',$spam_ok,null,123)";
 
             Picture_Uploaded_Save_File('name', 'users_images/');

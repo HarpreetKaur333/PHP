@@ -23,7 +23,7 @@ class db_pdo
             http_response_code(500);
             exit('DB connection Error : '.$e->getMessage());
         }
-        echo 'conected to DB.<br>';
+        // echo 'conected to DB.<br>';
     }
 
     // for queries not returning records:Insert,Delete,Update. returns number of records affected.

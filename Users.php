@@ -105,19 +105,22 @@ HTML;
         if (isset($errormsg)) {
             self::Login($errormsg);
         }
-        $users = $DB->querySelect("SELECT * FROM users WHERE email='".$email."'AND pw='".$pw."'");
+        // $users = $DB->querySelect("SELECT * FROM users WHERE email='".$email."'AND pw='".$pw."'");
+        $users = $DB->querySelect("SELECT * FROM users WHERE email='".$email."'");
         if (count($users) != 0 && $users != null) {
-            $_SESSION['email'] = $email;
+            if (password_verify($pw, $users[0]['pw'])) {
+                $_SESSION['email'] = $email;
 
-            //         // set cookies
+                //         // set cookies
             setcookie('email', $email, time() + 7776000); //set cookies for three months
             setcookie('last_login_time', time(), time() + 7776000);
-            $pageData['title'] = 'connected';
-            $pageData['content'] = '<h3>You are connected</h3> Welcome back '.$email.'.!!';
+                $pageData['title'] = 'connected';
+                $pageData['content'] = '<h3>You are connected</h3> Welcome back '.$email.'.!!';
 
-            $webPage = new WebPage();
-            $webPage->render($pageData);
-            exit();
+                $webPage = new WebPage();
+                $webPage->render($pageData);
+                exit();
+            }
         }
         // foreach ($Users as $one_users) {
         //     if ($one_users['email'] === $email and $one_users['pw'] === $pw) {
@@ -239,7 +242,8 @@ HTML;
                                         <div class="col-md-4 mb-4">
                                             <div class="form-outline">
                                             <label class="form-label" for="City">Country(Optional)</label>
-                                                {$countries_drop_down}
+                                             {$countries_drop_down}
+
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-4">
@@ -363,6 +367,8 @@ HTML;
             $province = '';
         }
 
+        // echo $_POST['country'][0];
+        // echo $_POST['country'][1];
         if (trim(isset($_POST['country']))) {
             $country = $_POST['country'];
         } else {
@@ -481,9 +487,10 @@ HTML;
             // var_dump($_POST['country']);
             // var_dump($_POST['language']);
             // var_dump($_POST['other_lang']);
+            $pw_hash = password_hash($_POST['pw'], PASSWORD_DEFAULT);
             $DB = new db_pdo();
             $sql_query = $DB->queryInsert("INSERT INTO users (email, pw,level, fullname, address, city, province, country,postal_code, language, other_lang, spam_ok, picture, customerNumber) VALUES
-           ('$email','$pw','admin', '$fullname','$address','$city',
+           ('$email','$pw_hash','admin', '$fullname','$address','$city',
             '$province','$country','$postalcode','$insert_lang','$other_lang',$spam_ok,'$pic_name',123)");
 
             Picture_Uploaded_Save_File('name', 'users_images/');
