@@ -197,9 +197,21 @@ HTML;
                 'spam_ok' => '',
             ];
         }
+        $DB = new db_pdo();
+        // var_dump([$_GET['id']]);
+        $get_Users = $DB->querySelectParam('select * FROM Users where id=:id', ['id' => $_GET['id']]);
+        // var_dump($get_Users);
+        $edit_id = $get_Users ? $get_Users[0]['id'] : '';
+        $edit_email = $get_Users ? $get_Users[0]['email'] : '';
+        $edit_level = $get_Users ? $get_Users[0]['pw'] : '';
+        $edit_level = $get_Users ? $get_Users[0]['level'] : '';
+        $edit_fullname = $get_Users ? $get_Users[0]['fullname'] : '';
+        $edit_address = $get_Users ? $get_Users[0]['address'] : '';
+        $edit_city = $get_Users ? $get_Users[0]['city'] : '';
+
         $pageData['title'] = 'Register As New User';
         $pageData['description'] = 'Create a account to shop track your order and etc..!!';
-
+        echo 'hello';
         $pageData['content'] = <<<HTML
         <section class="gradient-custom">
             <div class="container py-3">
@@ -212,25 +224,26 @@ HTML;
                                 <hr class="new5">
                                 <form action="index.php?op=5" method="POST" value="registration_form" class="form-inline" enctype="multipart/form-data" name="reg_form">
                                 <input type="hidden" name="op" value="5" >
+                                <input type="hidden" name="hideflags" value="{$edit_id}">
                                     <div class="row">
                                     <h4 class="mb-4 pb-2 pb-md-0 mb-md-3">General Information</h4>
                                         <div class="col-lg-4 mb-4">
                                             <div class="form-outline">
                                                 <label class="form-label" for="firstName">First-LastName</label>
-                                                <input type="text" name="fullname" id="txtfullnameid" class="form-control form-control-lg"  value="" placeholder="FirstName and LastName" maxlength="50" required/>
+                                                <input type="text" name="fullname" id="txtfullnameid" class="form-control form-control-lg"  value="{$edit_fullname}" placeholder="FirstName and LastName" maxlength="50" required/>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 mb-4">
                                             <div class="form-outline">
                                             <label class="form-label" for="Address">Address Line</label>
-                                                <input type="text" name="address" id="txtaddressid" class="form-control form-control-lg"  value="" placeholder="Address" maxlength="255" required/>
+                                                <input type="text" name="address" id="txtaddressid" class="form-control form-control-lg"  value="{$edit_address}" placeholder="Address" maxlength="255" required/>
 
                                             </div>
                                         </div>
                                         <div class="col-lg-4 mb-4">
                                             <div class="form-outline">
                                             <label class="form-label" for="City">City(Optional)</label>
-                                                <input type="text" id="City" class="form-control form-control-lg" name="city"  value=""  maxlength="50"  />
+                                                <input type="text" id="City" class="form-control form-control-lg" name="city"  value="{$edit_city}"  maxlength="50"  />
                                             </div>
                                         </div>
                                         <div class="col-lg-4 mb-4">
@@ -291,7 +304,7 @@ HTML;
                                         <h4 class="mb-4 pb-2 pb-md-0 mb-md-5">Connection Information(required)</h4>
                                         <div class="col-md-4 mb-4">
                                             <div class="form-outline">
-                                                <input type="email" name="email" id="txtEmailid" class="form-control form-control-lg" placeholder="Email"  maxlength="350" value="" required/>
+                                                <input type="email" name="email" id="txtEmailid" class="form-control form-control-lg" placeholder="Email"  maxlength="350" value="{$edit_email}" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-4">
@@ -366,9 +379,6 @@ HTML;
         } else {
             $province = '';
         }
-
-        // echo $_POST['country'][0];
-        // echo $_POST['country'][1];
         if (trim(isset($_POST['country']))) {
             $country = $_POST['country'];
         } else {
@@ -430,9 +440,8 @@ HTML;
         CIN('city', 50);
         CIN('postalcode', 7);
         CIN('other_lang', 25);
-        // check if email already exist
 
-        // var_dump($previous_data);
+        // check if email already exist
         $DB = new db_pdo();
         $get_email = $DB->querySelect("SELECT * FROM users WHERE email= '".$email);
         if ($get_email != null) {
@@ -451,10 +460,10 @@ HTML;
          * special case for checkbox.
          */
         $previous_data = $_POST;
-        if (isset($_POST['spam_ok'])) {
-            //if checkbox non check force value zero in input array
-            $previous_data['spam_ok'] = 0;
-        }
+        // if (isset($_POST['spam_ok'])) {
+        //     //if checkbox non check force value zero in input array
+        //     $previous_data['spam_ok'] = 0;
+        // }
         if ($errormsg !== '') {
             //clear password to avoid transmitting password over the sever
             $previous_data['pw'] = '';
@@ -475,29 +484,80 @@ HTML;
                 $pic_name = '';
             }
             $previous_data['fullname'] = htmlentities($previous_data['fullname']);
+
             // for avoid the html code inside adatbase
             // $fullname = htmlentities($_POST['fullname']);
-
-            // var_dump($other_lang);
-            // var_dump($insert_lang);
-            // var_dump($province);
-            // var_dump($country);
-
-            // var_dump($_POST['province']);
-            // var_dump($_POST['country']);
-            // var_dump($_POST['language']);
-            // var_dump($_POST['other_lang']);
-            $pw_hash = password_hash($_POST['pw'], PASSWORD_DEFAULT);
-            $DB = new db_pdo();
-            $sql_query = $DB->queryInsert("INSERT INTO users (email, pw,level, fullname, address, city, province, country,postal_code, language, other_lang, spam_ok, picture, customerNumber) VALUES
+            if (isset($_POST['Continue'])) {
+                $pw_hash = password_hash($_POST['pw'], PASSWORD_DEFAULT);
+                $DB = new db_pdo();
+                $sql_query = $DB->queryInsert("INSERT INTO users (email, pw,level, fullname, address, city, province, country,postal_code, language, other_lang, spam_ok, picture, customerNumber) VALUES
            ('$email','$pw_hash','admin', '$fullname','$address','$city',
             '$province','$country','$postalcode','$insert_lang','$other_lang',$spam_ok,'$pic_name',123)");
 
-            Picture_Uploaded_Save_File('name', 'users_images/');
-            $this->Logout();
+                Picture_Uploaded_Save_File('name', 'users_images/');
 
-            //here uploaded picture
+                $this->Logout();
+            }
+            //here call update function
+            if (!empty($_POST['hideflags'])) {
+                // echo 'hello';
+                // var_dump($_GET['id']);
+                //here check id in edit mode
+                $this->Edit();
+                // header('location: index.php?op=9'); //redirect to index page
+                $pageData['title'] = 'User edit';
+                $pageData['description'] = 'User edit';
+                $pageData['content'] = 'User Edited';
+                $pageData['message'] = 'Ok user edited';
+            }
         }
+    }
+
+    public function List()
+    {
+        $DB = new db_pdo();
+        $Users_table = $DB->querySelectParam('SELECT * FROM Users where level=:level',
+       ['level' => 'admin']);
+        $pageData['title'] = 'All Users';
+        $pageData['description'] = 'Details of all users';
+        $pageData['content'] = '<div class="table-responsive-lg col-lg-12 p-2 m-2" style="height:24em; overflow:auto;"><table class="table table-striped table-md table-bordered table-hover table-responsive">';
+        $pageData['content'] .= '<thead class="thead-light"><th>Id</th><th>Email</th><th>Level</th><th>FullName</th><th>Action</th></thead>';
+        $pageData['content'] .= '<tbody>';
+        foreach ($Users_table as $each_table_row => $val) {
+            $pageData['content'] .= '<tr>';
+            $pageData['content'] .= '<td>'.$val['id'].'</td>';
+            $pageData['content'] .= '<td>'.$val['email'].'</td>';
+            $pageData['content'] .= '<td>'.$val['level'].'</td>';
+            $pageData['content'] .= '<td>'.$val['fullname'].'</td>';
+            $pageData['content'] .= '<td class="col-md-1"><span>
+            <a href="index.php?op=4&id='.$val['id'].'" class="edit"><i class="fas fa-edit m-1"></i></a>
+            <a href="index.php?op=8&id='.$val['id'].'" class="delete"><i class="fa fa-trash m-1" ></i></a>
+            </span></td>';
+            $pageData['content'] .= '</tr>';
+        }
+
+        $pageData['content'] .= '</tbody>';
+        $pageData['content'] .= '</table></div>';
+        $webPage = new WebPage();
+        $webPage->render($pageData);
+    }
+
+    public function Delete()
+    {
+        $DB = new db_pdo();
+        $Users_table = $DB->queryParam('Delete FROM Users where id=:id',
+        ['id' => $_GET['id']]);
+        header('location: index.php?op=9');
+        $pageData['title'] = 'Delete User';
+        $pageData['description'] = 'Delete the selected User';
+        $pageData['content'] = 'User deleted';
+        $pageData['message'] = 'Ok user deleted';
+    }
+
+    public function Edit()
+    {
+        header('location: index.php?op=4');
+        $Users_table = $DB->queryParam('Update users set email='.$_POST['email'].',level='.$_POST['level'].',fullname='.$_POST['fullname'].' where id=:id', ['id' => $_GET['id']]);
     }
 
     public function Logout()

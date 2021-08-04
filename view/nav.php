@@ -14,6 +14,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Number of Visitors: <?php echo visitorCount(); ?></a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="index.php?op=0">Home</a>
                 </li>
                 <li class="nav-item">
@@ -37,8 +40,17 @@
                 </li>
                 <span class="m-3"> Login User Email:<?php echo $_SESSION['email'];
                 ?>
-
+                    <?php
+                        $imgPath = $DB->querySelect("SELECT picture FROM users WHERE email='$_SESSION[email]'");
+                        $imgPath = $imgPath[0]['picture'];
+                        if ($imgPath == null or strlen($imgPath) == 0) {
+                            $imgPath = 'users_images/default_profile_pic.png';
+                        }
+                        echo "<li><img src='$imgPath' height=50px width=50px></li>"; ?>
+                    else{
                     <i class="fa fa-user p-2"></i>
+                    }
+
                 </span>
 
                 <?php }
@@ -48,6 +60,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?op=300">Employee</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?op=9">Manage Users</a>
                 </li>
 
 

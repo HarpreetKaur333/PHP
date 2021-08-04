@@ -19,29 +19,6 @@ function Array_Display($array)
     }
     echo '</table>';
 }
-
-// function Table_Display($table)
-// {​​​​​​​
-//     $html_table = '<table class="table table-striped table-hover">';
-//     if (!isset($table) === 0) {​​​​​​​
-//         return 'Table is empty';
-//     }​​​​​​​
-//     $html_table = '<tr>';
-//     $collNames = array_keys($table[0]);
-//     foreach ($collNames as $one_coll) {​​​​​​​
-//         $html_table .= '<th>'.$one_call.'</th>';
-//     }​​​​​​​
-//     $html_table .= '</tr>';
-//     foreach ($table as $one_record) {​​​​​​​
-//         $html_table .= '<tr>';
-//         foreach ($one_record as $one_c) {​​​​​​​
-//             $html_table .= '<td>'.$one_c.'</td>';
-//         }​​​​​​​
-//         $html_table .= '</tr>';
-//     }​​​​​​​
-//     $html_table .= '</table>';
-//     return $html_table;
-// }​​​​​​​
 function visitorCount()
 {
     if (file_exists('visitors_counter.txt')) {
@@ -51,7 +28,7 @@ function visitorCount()
         //first time called
         $count = 0;
         $dir = getcwd();
-        //create file
+
         $filename = $dir.DIRECTORY_SEPARATOR.'visitors_counter.txt';
         $file = fopen($filename, 'w');
         fwrite($file, $count);
@@ -64,9 +41,9 @@ function visitorCount()
 }
 function Table_display($table)
 {
-    $html_table = '<div class="table-responsive-lg p-5 col-lg-12 "><table class="table table-striped table-md table-bordered table-hover table-responsive">';
+    $html_table = '<div class="table-responsive-lg col-lg-12 p-2 m-2" style="height:18.0em; overflow:auto;"><table class="table table-striped table-md table-bordered table-hover table-responsive">';
     if (count($table) === 0) {
-        return 'table is empty';
+        return 'table record is empty.';
     }
     $html_table .= '<thead class="thead-light">';
     $col_name = array_keys($table[0]);
@@ -81,7 +58,12 @@ function Table_display($table)
         foreach ($each_table_row as $one_column) {
             $html_table .= '<td>'.$one_column.'</td>';
         }
-        $html_table .= '<td><input type="button" name="view" value="view" class="btn btn-primary"/><input type="button" name="edit" value="edit" class="btn btn-primary"/><input type="button" name="delete" value="delete" class="btn btn-primary"/></td>';
+        // $html_table .= '<td><input type="button" name="view" value="view" class="btn btn-primary"/><input type="button" name="edit" value="edit" class="btn btn-primary"/><input type="button" name="delete" value="delete" class="btn btn-primary"/></td>';
+        $html_table .= '<td class="col-md-1"><span>
+        <a href="index.php?op=102" class="display"><i class="fas fa-eye m-1"></i></a>
+        <a href="index.php?op=103" class="edit"><i class="fas fa-edit m-1"></i></a>
+        <a href="index.php?op=104" class="delete"><i class="fa fa-trash m-1" ></i></a>
+        </span></td>';
         $html_table .= '</tr>';
     }
     $html_table .= '</tbody>';
@@ -331,19 +313,3 @@ function Picture_Save_BLOB($file_input)
         echo $message;
     }
 }
-
-// function Number_of_Visitior()
-// {
-//     $handle = fopen('counter.txt', 'r');
-//     if (!$handle) {
-//         echo 'could not open the file';
-//     } else {
-//         $counter = (int) fread($handle, 20);
-//         fclose($handle);
-//         ++$counter;
-//         echo $counter;
-//         $handle = fopen('counter.txt', 'w');
-//         fwrite($handle, $counter);
-//         fclose($handle);
-//     }
-// }

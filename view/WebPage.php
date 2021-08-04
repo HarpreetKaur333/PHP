@@ -20,11 +20,15 @@ class WebPage
         require_once 'view/header.php';
         require_once 'view/nav.php'; ?>
 <main>
-    <?php
+    <section>
+        <div class="w-100 p-3 h-auto d-inline-block overflow-auto">
+            <?php
     if (isset($pageData['message'])) {
         echo '<div class="alert " role="alert">'.$pageData['message'].'</div>';
     } ?>
-    <?php echo $pageData['content']; ?>
+            <?php echo $pageData['content']; ?>
+        </div>
+    </section>
 </main>
 <?php
  require_once 'view/footer.php';

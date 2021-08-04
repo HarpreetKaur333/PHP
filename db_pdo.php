@@ -6,17 +6,29 @@
 // }
 class db_pdo
 {
+    //local sever connection
     public const DB_USER_NAME = 'classicmodals_website';
     public const DB_USER_PW = 'abc123';
     public const DB_NAME = 'classicmodels';
     public const DB_HOST = '127.0.0.1';
     public const DB_PORT = 3306;
+
+    //remote connection details
+    // public const DB_USER_NAME = 'epiz_29307838';
+    // public const DB_USER_PW = '4dWPqP3WBAveKu';
+    // public const DB_NAME = 'epiz_29307838_classicmodels';
+    // public const DB_HOST = 'sql213.epizy.com';
+    // public const DB_PORT = 3306;
     private $connection;
 
     //automatically connect when creating a db_pdo project
     public function __construct()
     {
-        $options = [PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC];
+        $options =
+        $options = [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, ];
+        //  [PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC];
         try {
             $this->connection = new PDO('mysql:host='.self::DB_HOST.';port='.self::DB_PORT.';dbname='.self::DB_NAME, self::DB_USER_NAME, self::DB_USER_PW, $options);
         } catch (PDOException $e) {
@@ -66,19 +78,30 @@ class db_pdo
         }
     }
 
-    public function concat_function()
-    {
-        try {
-            return $this->connection->query("SELECT Concat(code,' - ', nom)
-            AS CodeNom FROM provinces");
-            // foreach ($provinces  as $key => $value) {
-            // return $provinces;
-            // var_dump($value);
-            // }
-        } catch (PDOException $e) {
-            echo 'SQL Query Error: '.$e->getMessage();
-        }
-    }
+    // public function Delete_Record()
+    // {
+    //     try {
+    //         return $this->connection->exec($sql_str);
+    //         echo 'User Deleted successfully.';
+    //     } catch (PDOException $e) {
+    //         echo 'SQL Query Error: '.$e->getMessage();
+    //     }
+    //     // $query3 = "delete from newuser where id=$id";
+    // }
+
+    // public function concat_function()
+    // {
+    //     try {
+    //         return $this->connection->query("SELECT Concat(code,' - ', nom)
+    //         AS CodeNom FROM provinces");
+    //         // foreach ($provinces  as $key => $value) {
+    //         // return $provinces;
+    //         // var_dump($value);
+    //         // }
+    //     } catch (PDOException $e) {
+    //         echo 'SQL Query Error: '.$e->getMessage();
+    //     }
+    // }
 
     public function __destruct()
     {
@@ -90,7 +113,7 @@ class db_pdo
             $stmt = $this->connection->prepare($sql_str);
             $stmt->execute($params);
         } catch (PDOException $e) {
-            Crash(500, 'Sql statement '.$e.getMessage());
+            // Crash(500, 'Sql statement '.$e.getMessage());
         }
     }
 
@@ -101,7 +124,7 @@ class db_pdo
             $stmt->execute($params);
             $records = $stmt->fetchall();
         } catch (PDOException $e) {
-            Crash(500, 'Sql statement '.$e.getMessage());
+            // Crash(500, 'Sql statement '.$e.getMessage());
         }
 
         return $records;
