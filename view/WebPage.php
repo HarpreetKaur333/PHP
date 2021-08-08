@@ -21,12 +21,11 @@ class WebPage
         require_once 'view/nav.php'; ?>
 <main>
     <section>
-        <div class="w-100 p-3 h-auto d-inline-block overflow-auto">
+        <div class="w-100 p-3 h-auto d-inline-block overflow-auto" <?php echo $pageData['content']; ?>
             <?php
-    if (isset($pageData['message'])) {
-        echo '<div class="alert " role="alert">'.$pageData['message'].'</div>';
-    } ?>
-            <?php echo $pageData['content']; ?>
+            if (isset($pageData['message'])) {
+                echo '<div class="alert " role="alert">'.$pageData['message'].'</div>';
+            } ?>
         </div>
     </section>
 </main>

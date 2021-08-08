@@ -20,9 +20,11 @@
     </meta>
     <link rel="stylesheet" href="CSS/global.css">
     <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
-    <script src="Bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="Bootstrap/Jquery/jquery-3.6.0.min.js"> </script>
     <link rel="stylesheet" href="Bootstrap/fontawesome-free-5.15.3-web/css/all.css">
+
+    <script type="text/javascript" src="Bootstrap/Jquery/jquery-3.6.0.min.js"> </script>
+    <script src="Bootstrap/js/bootstrap.min.js"></script>
+    <script src="JS/global.js"></script>
     <?php ?>
 </head>
 

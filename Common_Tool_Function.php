@@ -39,6 +39,10 @@ function visitorCount()
 
     return $count;
 }
+function check_htmlentities($str)
+{
+    return htmlentities($str);
+}
 function Table_display($table)
 {
     $html_table = '<div class="table-responsive-lg col-lg-12 p-2 m-2" style="height:18.0em; overflow:auto;"><table class="table table-striped table-md table-bordered table-hover table-responsive">';
@@ -58,7 +62,7 @@ function Table_display($table)
         foreach ($each_table_row as $one_column) {
             $html_table .= '<td>'.$one_column.'</td>';
         }
-        // $html_table .= '<td><input type="button" name="view" value="view" class="btn btn-primary"/><input type="button" name="edit" value="edit" class="btn btn-primary"/><input type="button" name="delete" value="delete" class="btn btn-primary"/></td>';
+
         $html_table .= '<td class="col-md-1"><span>
         <a href="index.php?op=102" class="display"><i class="fas fa-eye m-1"></i></a>
         <a href="index.php?op=103" class="edit"><i class="fas fa-edit m-1"></i></a>
@@ -72,9 +76,9 @@ function Table_display($table)
     return $html_table;
 }
 
-function redirect($newURL)
+function redirect($newURL, $msg)
 {
-    header('location:', $newURL);
+    header('location:.$newURL', $msg);
 }
 
 use PHPMailer\PHPMailer\Exception;
@@ -138,10 +142,6 @@ function CIN($name, $maxLength)
             Crash(400, 'Form input too long..!! :'.$name);
         }
     }
-}
-function check_htmlentities($str)
-{
-    return htmlentities($str);
 }
 
 /**

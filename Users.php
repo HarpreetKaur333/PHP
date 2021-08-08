@@ -211,7 +211,6 @@ HTML;
 
         $pageData['title'] = 'Register As New User';
         $pageData['description'] = 'Create a account to shop track your order and etc..!!';
-        echo 'hello';
         $pageData['content'] = <<<HTML
         <section class="gradient-custom">
             <div class="container py-3">

@@ -11,6 +11,7 @@ require_once 'about.php';
 require_once 'Users.php';
 require_once 'employes.php';
 require_once 'Product.php';
+require_once 'office.php';
 ?>
 
 <?php
@@ -52,24 +53,25 @@ if (isset($_GET['op'])) {
             break;
 
         case 3:
-                $users = new Users();
-                $users->Logout(); //verify the login details
-                break;
+            $users = new Users();
+            $users->Logout(); //verify the login details
+            break;
 
         case 4:
-                $users = new Users();
-                $users->register(); //display register page
-                break;
+            $users = new Users();
+            $users->register(); //display register page
+            break;
 
         case 5:
-                $register = new Users();
-                $register->register_verify(); //verify the register details
-                break;
+            $register = new Users();
+            $register->register_verify(); //verify the register details
+            break;
 
         case 10:
             $about_page_obj = new AboutPage();
             $about_page_obj->AboutPage();
             break;
+            //here exercise 6.8 code product and product catalogue
         case 110:
             // if (!isset($_SESSION['email'])) {
                 Crash(401, 'Must be Logged in to acces the Page');
@@ -79,37 +81,59 @@ if (isset($_GET['op'])) {
                 break;
             // }
         case 111:
-                $product_Obj = new Product();
-                $product_Obj->Products_Catalogue();
-                break;
-        case 190: //products web service-returns list of products json
+            $product_Obj = new Product();
+            $product_Obj->Products_Catalogue();
+            break;
+
+        //here start final project "Product Table"
+
+        case 109: // products json
             $product_Obj = new Product();
             $product_Obj->ListJSON();
             break;
-        case 100: //show the list of all products
+
+        case 100: //list of all products
             $product_Obj = new Product();
             $product_Obj->List();
             break;
-        case 102: //display seach record
-                $product_Obj = new Product();
-                $product_Obj->Display();
-                break;
-        case 103: //display seach record
+
+        case 103: //display each record
             $product_Obj = new Product();
-            $product_Obj->AddorEdit();
+            $product_Obj->Display();
             break;
-        case 104: //delete product
-                $product_Obj = new Product();
-                $product_Obj->Delete();
-                break;
+
+        case 104: //delete
+            $product_Obj = new Product();
+            $product_Obj->Delete();
+            break;
+
         case 105: //Save product
-                $product_Obj = new Product();
-                $product_Obj->Save();
-                break;
-        case 111: //Save product
-                    $product_Obj = new Product();
-                    $product_Obj->Verify_AddEdit();
-                    break;
+            $product_Obj = new Product();
+            $product_Obj->Save();
+            break;
+
+        case 106: //verify_Save product
+            $product_Obj = new Product();
+            $product_Obj->verify_Save();
+            break;
+
+            // case 502:
+            //     $offices = new offices();
+            //     $offices->readList();
+            //     break;
+            // case 503:
+            //     $offices = new offices();
+            //     $offices->viewData();
+            //     break;
+            // case 504:
+            //     $offices = new offices();
+            //     $offices->updateData();
+            //     break;
+            // case 505:
+            //     $offices = new offices();
+            //     $offices->deleteData();
+            //     break;
+        //here employee details
         case 300:
             $employes = new employes();
             $employes->List();

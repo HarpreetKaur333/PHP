@@ -62,7 +62,7 @@ class db_pdo
     {
         try {
             return $this->connection->exec($sql_str);
-            echo 'New User record created successfully.';
+            echo 'New Product created successfully.';
         } catch (PDOException $e) {
             echo 'SQL Query Error: '.$e->getMessage();
         }
@@ -77,31 +77,6 @@ class db_pdo
             echo 'SQL Query Error: '.$e->getMessage();
         }
     }
-
-    // public function Delete_Record()
-    // {
-    //     try {
-    //         return $this->connection->exec($sql_str);
-    //         echo 'User Deleted successfully.';
-    //     } catch (PDOException $e) {
-    //         echo 'SQL Query Error: '.$e->getMessage();
-    //     }
-    //     // $query3 = "delete from newuser where id=$id";
-    // }
-
-    // public function concat_function()
-    // {
-    //     try {
-    //         return $this->connection->query("SELECT Concat(code,' - ', nom)
-    //         AS CodeNom FROM provinces");
-    //         // foreach ($provinces  as $key => $value) {
-    //         // return $provinces;
-    //         // var_dump($value);
-    //         // }
-    //     } catch (PDOException $e) {
-    //         echo 'SQL Query Error: '.$e->getMessage();
-    //     }
-    // }
 
     public function __destruct()
     {
