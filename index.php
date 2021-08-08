@@ -11,7 +11,7 @@ require_once 'about.php';
 require_once 'Users.php';
 require_once 'employes.php';
 require_once 'Product.php';
-require_once 'office.php';
+
 ?>
 
 <?php

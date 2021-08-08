@@ -20,7 +20,7 @@ class Product
         header('Content-Type: application/json');
         // header('Content-Type: application/json; charset=UTF-8');
         http_response_code(200);
-        // echo $productsJson;
+        echo $productsJson;
         $pageData['title'] = 'Product Json';
         $pageData['description'] = 'Product Json format';
         $pageData['content'] = '<h4>Product Data In JSON format</h4>';
@@ -32,7 +32,6 @@ class Product
     public function List()
     {
         $DB = new db_pdo();
-        // $products_table = $DB->table('products');
 
         $searchProductCode = isset($_POST['productCode']) ? $_POST['productCode'] : '';
 
@@ -280,7 +279,6 @@ HTML;
 
     public function verify_Save($message = '')
     {
-        echo 'inside verifysave';
         $DB = new db_pdo();
 
         $editProductCode = isset($_GET['productCode']) ? $_GET['productCode'] : ''; //product code get from url
@@ -297,7 +295,10 @@ HTML;
         $buyPrice = (trim(isset($_POST['buyPrice']) ? $_POST['buyPrice'] : ''));
         $MSRP = trim(isset($_POST['MSRP']) ? $_POST['MSRP'] : '');
 
-        var_dump($productLine, $productDescription, $productname, $productScale, $productVendor, $productCode);
+        $previous_data = $_POST; //save all previous data
+        if (isset($errormsg)) {
+            self::Save($errormsg, $previous_data);
+        }
         CIN('productCode', 15);
         CIN('productname', 70);
         CIN('productLine', 50);
@@ -307,7 +308,18 @@ HTML;
         CIN('quantityInStock', 20);
         CIN('buyPrice', 20);
         CIN('MSRP', 20);
-        // if (isset($_POST['save'])) {
+
+        // check if productCode already exist
+        $DB = new db_pdo();
+        $get_pCode = $DB->querySelect("SELECT * FROM products WHERE productCode= '".$productCode);
+        if ($get_pCode != null) {
+            foreach ($get_pCode as $one_pCode) {
+                if ($one_pCode['productCode'] === $productCode) {
+                    $errormsg .= 'This Product Code already in use, please select a different email!!';
+                }
+            }
+        }
+
         if (!empty($_POST['hideproductcode'])) {
             $query = "UPDATE products set productCode='$editProductCode',productname ='$productname',productLine='$productLine',productScale='$productScale',productVendor='$productVendor', productDescription='$productDescription',quantityInStock=$quantityInStock,buyPrice=$buyPrice,MSRP=$MSRP where productCode='".$editProductCode."'";
             var_dump($query);
@@ -318,15 +330,12 @@ HTML;
             $query = "INSERT INTO products (productCode, productName,productLine, productScale, productVendor, productDescription, quantityInStock, buyPrice,MSRP)
             VALUES('$productCode','$productname','$productLine', '$productScale','$productVendor','$productDescription',$quantityInStock,$buyPrice,$MSRP)";
 
+            var_dump(query);
             var_dump($_POST);
-            var_dump($query);
-            print_r($query);
             $message = 'Products successful Added.';
-
             header('Location: index.php?op=105');
         }
         $sql_query = $DB->queryInsert($query);
-        // }
         $pageData['title'] = 'Product';
         $pageData['description'] = 'Product Table Operation';
         $pageData['content'] = 'Product Table';

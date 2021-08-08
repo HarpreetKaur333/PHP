@@ -24,7 +24,8 @@ class WebPage
         <div class="w-100 p-3 h-auto d-inline-block overflow-auto" <?php echo $pageData['content']; ?>
             <?php
             if (isset($pageData['message'])) {
-                echo '<div class="alert " role="alert">'.$pageData['message'].'</div>';
+                // echo '<div class="alert " role="alert">'.$pageData['message'].'</div>';
+                // print_r($pageData['message']);
             } ?>
         </div>
     </section>

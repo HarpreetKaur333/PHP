@@ -199,7 +199,9 @@ HTML;
         }
         $DB = new db_pdo();
         // var_dump([$_GET['id']]);
-        $get_Users = $DB->querySelectParam('select * FROM Users where id=:id', ['id' => $_GET['id']]);
+        $id = isset($_GET['id']) ? $_GET['id'] : ''; //product code get from url
+
+        $get_Users = $DB->querySelectParam('select * FROM Users where id=:id', ['id' => $id]);
         // var_dump($get_Users);
         $edit_id = $get_Users ? $get_Users[0]['id'] : '';
         $edit_email = $get_Users ? $get_Users[0]['email'] : '';
