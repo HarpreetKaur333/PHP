@@ -52,7 +52,7 @@ class Product
         $pageData['content'] .= '</form></div>';
         //here form end
         $pageData['content'] .= '<div class="col-md-5"></div><div class="col-md-2" style="float:right"><div class="form-group">
-        <a href="index.php?op=105" style="color: black;"><i class="fas fa-backward"></i><span style="margin-left: 10px;">Add Product</span></a>
+        <a href="index.php?op=105" style="color: black;text-decoration: none;"><i class="fas fa-backward"></i><span style="margin-left: 10px;">Add Product</span></a>
     </div></div></div></div>';
 
         $pageData['content'] .= '<div class="table-responsive-lg col-lg-12 p-2 mb-5" style="height:19.0em; overflow:auto;"><table class="table table-striped table-md table-bordered table-hover table-responsive">';
@@ -70,7 +70,7 @@ class Product
             $pageData['content'] .= '<td>'.$each_table_row['buyPrice'].'</td>';
             $pageData['content'] .= '<td>'.$each_table_row['MSRP'].'</td>';
             $pageData['content'] .= '<td class="col-md-1"><span>
-            <a href="index.php?op=103&productCode='.$each_table_row['productCode'].'" class="view"><i class="fas fa-eye m-1"></i></a>
+            <a href="index.php?op=102&productCode='.$each_table_row['productCode'].'" class="view"><i class="fas fa-eye m-1"></i></a>
             <a href="index.php?op=105&productCode='.$each_table_row['productCode'].'" class="edit"><i class="fas fa-edit m-1"></i></a>
             <a href="index.php?op=104&productCode='.$each_table_row['productCode'].'" class="delete"><i class="fa fa-trash m-1" ></i></a>
             </span></td>';
@@ -97,15 +97,15 @@ class Product
             $pageData['description'] = 'Details of parents and child table!!';
             $pageData['content'] = '<div class="col-lg-12 mt-2">
             <div class="container">
-  <div class="row"><div class="col-lg-2"><a href="index.php?op=105" style="color: black;"><i class="fas fa-backward"></i><span style="margin-left: 10px;">Add Product</span></a></div>
+  <div class="row"><div class="col-lg-2"><a href="index.php?op=105" style="color: black;text-decoration: none;"><i class="fas fa-backward"></i><span style="margin-left: 10px;">Add Product</span></a></div>
 
             <div class="col-lg-8"></div>
-            <div class="col-lg-2"><a href="index.php?op=100" style="color: black;"><span style="margin-right: 10px;">Edit/Delete</span><i class="fas fa-forward"></i></a></div></div>
+            <div class="col-lg-2"><a href="index.php?op=100" style="color: black;text-decoration: none;"><span style="margin-right: 10px;">Edit/Delete</span><i class="fas fa-forward"></i></a></div></div>
             </div>
             <div class="col-lg-12"><fieldset class="mt-2">
-            <legend>Details of 1 Product Code:- '.$product_code.'</legend>';
+            <legend>Product Code:- '.$product_code.'</legend>';
             $pageData['content'] .= '<div class="table-responsive-lg col-lg-12 p-2 mt-6" style="height:10.0em; overflow:auto;"><table class="table table-striped table-md table-bordered table-hover table-responsive">';
-            $pageData['content'] .= '<thead class="thead-light"><th>Product Code</th><th>Product Name</th><th>Product Line</th><th>Product Scale</th><th>Product Vendor</th><th>Product Description</th><th>Quantity InStock</th><th>Buy Price</th><th>MSRP</th></thead>';
+            $pageData['content'] .= '<thead class="thead-light"><th>Product Code</th><th>Product Name</th><th>Product Line</th><th>Product Scale</th><th>Product Vendor</th><th>Product Description</th><th>Quantity InStock</th><th>Buy Price</th><th>MSRP</th><th>Action</th></thead>';
             $pageData['content'] .= '<tbody>';
             foreach ($products_table as $each_table_row) {
                 $pageData['content'] .= '<tr>';
@@ -118,6 +118,10 @@ class Product
                 $pageData['content'] .= '<td>'.$each_table_row['quantityInStock'].'</td>';
                 $pageData['content'] .= '<td>'.$each_table_row['buyPrice'].'</td>';
                 $pageData['content'] .= '<td>'.$each_table_row['MSRP'].'</td>';
+                $pageData['content'] .= '<td class="col-md-1"><span>
+                    <a href="index.php?op=105&productCode='.$each_table_row['productCode'].'" class="edit"><i class="fas fa-edit m-1"></i></a>
+                    <a href="index.php?op=104&productCode='.$each_table_row['productCode'].'" class="delete"><i class="fa fa-trash m-1" ></i></a>
+                    </span></td>';
                 $pageData['content'] .= '</tr>';
             }
             $pageData['content'] .= '</tbody>';
@@ -130,7 +134,7 @@ class Product
                 return 'no order is placed of this product code.'.$product_code;
             } else {
                 $pageData['content'] .= '<div class="col-lg-12"><fieldset class="mt-2">
-                <legend>Details of 1 Product Orders:- '.$product_code.'</legend><div class="table-responsive-lg col-lg-12 p-2 m-2" style="height:20.0em; overflow:auto;"><table class="table table-striped table-md table-bordered table-hover table-responsive">';
+                <legend>Orders of this Product Code:- '.$product_code.'</legend><div class="table-responsive-lg col-lg-12 p-2 m-2" style="height:20.0em; overflow:auto;"><table class="table table-striped table-md table-bordered table-hover table-responsive">';
                 $pageData['content'] .= '<thead class="thead-light"><th>Product Code</th><th>Order Number</th><th>Quantity Ordered</th><th>Price Each</th><th>Order Line Number</th></thead>';
                 $pageData['content'] .= '<tbody>';
                 foreach ($orderdetails_table as $orderdetails_each_row) {
@@ -140,6 +144,7 @@ class Product
                     $pageData['content'] .= '<td>'.$orderdetails_each_row['quantityOrdered'].'</td>';
                     $pageData['content'] .= '<td>'.$orderdetails_each_row['priceEach'].'</td>';
                     $pageData['content'] .= '<td>'.$orderdetails_each_row['orderLineNumber'].'</td>';
+
                     $pageData['content'] .= '</tr>';
                 }
                 $pageData['content'] .= '</tbody>';
@@ -228,34 +233,34 @@ class Product
                                             <div class="form-outline">
 
                                             <label class="form-label" for="City">Product Description</label>
-                                             <input type="text" id="productDescriptionid" class="form-control form-control-lg" name="productDescription" placeholder="productVendor"  value="{$productDescription}"  maxlength="1500"  required/>
-                                            <!-- <textarea rows = "3" cols = "3" id="productDescriptionid" class="form-control form-control-lg" name="productDescription"
-                                            value="{$productDescription}"  maxlength="1500" >
-                                            </textarea> -->
+                                             <!-- <input type="text" id="productDescriptionid" class="form-control form-control-lg" name="productDescription" placeholder="productVendor"  value=""  maxlength="1500"  required/> -->
+                                            <textarea rows = "3" cols = "3" id="productDescriptionid" class="form-control form-control-lg" name="productDescription"
+                                              maxlength="1500" >{$productDescription}
+                                            </textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-4">
                                             <div class="form-outline">
                                             <label class="form-label" for="quantityInStock">QuantityInStock</label>
                                                 <input type="text" name="quantityInStock" maxlength="7" id="quantityInStockid" class="form-control form-control-lg"
-                                                value="{$quantityInStock}" placeholder="quantityInStock" required/>
+                                                value="{$quantityInStock}" placeholder="quantityInStock"  onkeypress="return isNumberKey(event)" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-4">
                                             <div class="form-outline">
                                             <label class="form-label" for="buyPrice">Buy Price</label>
-                                                <input type="text" name="buyPrice" maxlength="7" id="buyPriceid" class="form-control form-control-lg" value="{$buyPrice}" placeholder="buyPrice" required/>
+                                                <input type="text" name="buyPrice" maxlength="7" id="buyPriceid" class="form-control form-control-lg" value="{$buyPrice}" placeholder="buyPrice" onkeypress="return isNumberKey(event)" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-4 mb-4">
                                             <div class="form-outline">
                                             <label class="form-label" for="MSRP">MSRP</label>
-                                                <input type="text" name="MSRP" maxlength="7" id="MSRPid" class="form-control form-control-lg" value="{$MSRP}" placeholder="MSRP" required/>
+                                                <input type="text" name="MSRP" maxlength="7" id="MSRPid" class="form-control form-control-lg" value="{$MSRP}" placeholder="MSRP" onkeypress="return isNumberKey(event)" required/>
                                             </div>
                                         </div>
                                         <div class="col-md-12 mb-4">
                                             <button  type="submit" name="save" class="btn btn-primary btn-sm" data-mdb-ripple-color="blue" value="save" id="btnsave" >Save</button>
-                                            <button  type="submit" name="Cancel" class="btn btn-primary btn-sm" data-mdb-ripple-color="blue" value="Cancel" onClick="window.history.back();" >Cancel</button>
+                                            <a href="index.php?op=100"><button  type="button" name="Cancel" class="btn btn-primary btn-sm" data-mdb-ripple-color="blue" value="Cancel" >Cancel</button></a>
                                         </div>
 
                                     </div>
@@ -275,6 +280,7 @@ HTML;
 
     public function verify_Save($message = '')
     {
+        echo 'inside verifysave';
         $DB = new db_pdo();
 
         $editProductCode = isset($_GET['productCode']) ? $_GET['productCode'] : ''; //product code get from url
@@ -291,6 +297,7 @@ HTML;
         $buyPrice = (trim(isset($_POST['buyPrice']) ? $_POST['buyPrice'] : ''));
         $MSRP = trim(isset($_POST['MSRP']) ? $_POST['MSRP'] : '');
 
+        var_dump($productLine, $productDescription, $productname, $productScale, $productVendor, $productCode);
         CIN('productCode', 15);
         CIN('productname', 70);
         CIN('productLine', 50);
@@ -307,16 +314,16 @@ HTML;
 
             $message = 'Products successful edited.';
             header('Location: index.php?op=100');
-        //redirect('Location: index.php?op=100', $message);
         } else {
             $query = "INSERT INTO products (productCode, productName,productLine, productScale, productVendor, productDescription, quantityInStock, buyPrice,MSRP)
             VALUES('$productCode','$productname','$productLine', '$productScale','$productVendor','$productDescription',$quantityInStock,$buyPrice,$MSRP)";
 
+            var_dump($_POST);
             var_dump($query);
             print_r($query);
             $message = 'Products successful Added.';
 
-            header('Location: index.php?op=105', $message);
+            header('Location: index.php?op=105');
         }
         $sql_query = $DB->queryInsert($query);
         // }

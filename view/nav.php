@@ -64,7 +64,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="index.php?op=9">Manage Users</a>
                 </li>
-
+                <li class="nav-item">
+                    <a class="nav-link" href="index.php?op=100">Manage Product</a>
+                </li>
 
             </ul>
             <!-- <form class="d-flex">

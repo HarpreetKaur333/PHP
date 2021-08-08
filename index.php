@@ -97,10 +97,15 @@ if (isset($_GET['op'])) {
             $product_Obj->List();
             break;
 
-        case 103: //display each record
+        case 102: //display each record
             $product_Obj = new Product();
             $product_Obj->Display();
             break;
+
+        // case 103: // edit each single
+        //     $product_Obj = new Product();
+        //     $product_Obj->Display();
+        //     break;
 
         case 104: //delete
             $product_Obj = new Product();
@@ -117,22 +122,6 @@ if (isset($_GET['op'])) {
             $product_Obj->verify_Save();
             break;
 
-            // case 502:
-            //     $offices = new offices();
-            //     $offices->readList();
-            //     break;
-            // case 503:
-            //     $offices = new offices();
-            //     $offices->viewData();
-            //     break;
-            // case 504:
-            //     $offices = new offices();
-            //     $offices->updateData();
-            //     break;
-            // case 505:
-            //     $offices = new offices();
-            //     $offices->deleteData();
-            //     break;
         //here employee details
         case 300:
             $employes = new employes();
